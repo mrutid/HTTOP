@@ -1,0 +1,9 @@
+PID    COMMAND          %CPU TIME     #TH  #WQ #PORTS #MREGS RPRVT  RSHRD  RSIZE  VPRVT  VSIZE  PGRP  PPID  STATE    UID FAULTS    COW     MSGSENT    MSGRECV    SYSBSD     SYSMACH    CSW        PAGEINS  USER
+28000  top              0.0  00:00.10 1/1  0   21+    32+    768K+  336K+  1304K+ 17M+   2378M+ 26794 27999 running  0   1359+     51+     57241+     28620+     426+       28747+     44+        0        root
+27999  bash             0.0  00:00.00 1    0   14+    23+    156K+  852K+  676K+  17M+   2378M+ 26794 27998 sleeping 501 315+      57+     132+       66+        151+       96+        5+         0        mru
+27998- Python           0.0  00:00.08 1    0   19+    118+   2532K+ 2848K+ 4468K+ 20M+   592M+  26794 26794 sleeping 501 1703+     243+    293+       137+       13324+     209+       110+       0        mru
+27958  taskgated        0.0  00:00.02 2    0   26+    27+    476K+  348K+  1052K+ 27M+   2387M+ 27958 1     sleeping 0   575+      63+     280+       95+        1542+      250+       81+        0        root
+27940  mdworker         0.0  00:00.10 3    1   48+    59+    1576K+ 11M+   3648K+ 31M+   2410M+ 27940 1     sleeping 89  1687+     147+    1046+      473+       2178+      662+       138+       0        _spotlight
+27939- Google Chrome He 0.0  00:01.56 6    1   93+    326+   18M+   80M+   39M+   70M+   1057M+ 20821 20821 sleeping 501 16822+    1091+   13160+     6510+      31034+     14482+     5476+      2248+    mru
+27938  ocspd            0.0  00:00.02 1    0   23+    28+    540K+  576K+  1276K+ 17M+   2378M+ 27938 1     sleeping 0   584+      57+     202+       85+        236+       154+       41+        0        root
+27937- Google Chrome He 0.0  00:02.15 6    1   94+    299+   17M+   75M+   38M+   70M+   1051M+ 20821 20821 sleeping 501 16092+    

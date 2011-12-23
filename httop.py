@@ -1,35 +1,15 @@
-# coding=utf-8
-import subprocess
-
 __author__ = 'mrutid'
-import string
 import BaseHTTPServer
+import commands
 from mako.template import Template
 
-HOST_NAME = "localhost" #'bandini.hi.inet'
+HOST_NAME = 'bandini.hi.inet'
 PORT_NUMBER = 8080
-class Command:
-    @staticmethod
-    def do_command(command):
-        output_command = subprocess.check_output(command['path'], shell=True)
-        html = command['parse'](output_command)
-        return html
-
 
 class ParseConsole:
     @staticmethod
-    def parse(output_command):
-    #returns a Matrix with the top string
-        aux_line_split = output_command.split('\n')
-        word_matrix = []
-        for line in aux_line_split:
-            aux_word_split = line.split()
-            word_matrix.append(aux_word_split)
-        return topTemplate.render(matrix=word_matrix)
-
-    @staticmethod
-    def parse_top(output_command):
-        #returns a Matrix with the top string
+    def parse_to_table(output_command):
+        #returns a Matrix with the string
         aux_line_split = output_command.split('\n')
         word_matrix = []
         watch_flag = False
@@ -39,37 +19,33 @@ class ParseConsole:
             if watch_flag:
                 word_matrix.append(aux_word_split)
             if not aux_word_split:
-                watch_flag = True
+                watch_flag=True
         return topTemplate.render(matrix=word_matrix)
+        #return ParseConsole.matrix_to_html(word_matrix)
+
+class ExecHandler:
+    #Static class to systems calls
+    @staticmethod
+    def do_top():
+        #execTOP
+        output_command = commands.getoutput("export TERM=vt100 && top -l 1")
+        #return
+        return  ParseConsole.parse_to_table(output_command)
+
+class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+    def do_GET(response):
+        response.send_response(200)
+        response.send_header("Content-type", "text/html")
+        response.end_headers()
+        response.wfile.write(ExecHandler.do_top())
 
 
-#:( I don't like this place
-#Config Commands
-requestDispatcher = {
-    '/ls': {'path': "ls -la /usr", 'parse': ParseConsole.parse},
-    '/top': {'path': "top -l 1", 'parse': ParseConsole.parse_top}
-}
-
-class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
-    def do_GET(self):
-        global requestDispatcher
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        #manage request
-        command = requestDispatcher[string.lower(self.path)]
-        if command:
-            html = Command.do_command(command)
-            self.wfile.write(html)
-        else:
-            self.wfile.write("Unsupported Command")
-
-
-#Create Templates
+#create templates
+#TOP template (I suppouse I only need this once)
 topTemplate = Template(filename="TopTemplate.mako")
+#Other templates Just in case...
 
-#Start the Http Server
-http_server = server_class = BaseHTTPServer.HTTPServer((HOST_NAME, PORT_NUMBER), HTTPHandler)
+http_server = server_class = BaseHTTPServer.HTTPServer((HOST_NAME, PORT_NUMBER), MyHandler)
 try:
     http_server.serve_forever()
 except KeyboardInterrupt:

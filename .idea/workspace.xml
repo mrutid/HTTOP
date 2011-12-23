@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="667776eb-c186-4c3e-9347-51f25dbac9fe" name="Default" comment="" />
+    <list default="true" id="667776eb-c186-4c3e-9347-51f25dbac9fe" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="HTTOP.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +28,7 @@
       <file leaf-file-name="httop.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/httop.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="27" selection-start="544" selection-end="544" vertical-scroll-proportion="-0.20466322">
+            <state line="39" column="27" selection-start="1145" selection-end="1145" vertical-scroll-proportion="0.3031088">
               <folding />
             </state>
           </provider>
@@ -35,11 +37,8 @@
       <file leaf-file-name="TopTemplate.mako" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TopTemplate.mako">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1324602302000" expanded="true" signature="62:263" placeholder="..." />
-                <marker date="1324602302000" expanded="true" signature="62:243" placeholder="..." />
-              </folding>
+            <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -334,17 +333,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TopTemplate.mako">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="6" selection-start="6" selection-end="6" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1324602302000" expanded="true" signature="62:263" placeholder="..." />
-            <marker date="1324602302000" expanded="true" signature="62:243" placeholder="..." />
-          </folding>
+        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/httop.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="27" selection-start="544" selection-end="544" vertical-scroll-proportion="-0.20466322">
+        <state line="39" column="27" selection-start="1145" selection-end="1145" vertical-scroll-proportion="0.3031088">
           <folding />
         </state>
       </provider>

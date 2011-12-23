@@ -12,7 +12,6 @@ def parse(output_command, header_separator, include_header=False):
         aux_word_split = line.split()
         if watch_flag:
             word_matrix.append(aux_word_split)
-
         if  (header_separator is not None) & (line == header_separator):
             watch_flag = True
             if include_header:

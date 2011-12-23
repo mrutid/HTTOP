@@ -42,8 +42,8 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         else:
             if command:
                 html = do_command(command)
+                #Hechizo nivel Archimago
                 html = unicodedata.normalize('NFKD', html).encode('ascii','ignore')
-                #html = html.encode('utf-8','ignore')
                 self.wfile.write(html)
 
 #Start the Http Server

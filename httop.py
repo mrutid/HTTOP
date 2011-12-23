@@ -1,6 +1,5 @@
 # coding=utf-8
 import subprocess
-__author__ = 'mrutid'
 import string
 import BaseHTTPServer
 import unicodedata
@@ -9,18 +8,18 @@ import parsers
 HOST_NAME = "localhost" #'bandini.hi.inet'
 PORT_NUMBER = 8080
 
-def do_command(command):
-    output_command = subprocess.check_output(command['path'], shell=True)
-    html = command['parse'](output_command)
-    return html
-
-#:( I don't like this place
 #Config Commands
 requestDispatcher = {
     '/ls': {'path': "ls -la $HOME", 'parse': parsers.parse},
     '/top': {'path': "top -l 1", 'parse': parsers.parse_top},
     '/top/basic': {'path': "top -l 1", 'parse': parsers.parse}
 }
+
+
+def do_command(command):
+    output_command = subprocess.check_output(command['path'], shell=True)
+    html = command['parse'](output_command)
+    return html
 
 class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_GET(self):

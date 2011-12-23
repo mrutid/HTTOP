@@ -57,12 +57,15 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/html")
         self.end_headers()
         #manage request
-        command = requestDispatcher[string.lower(self.path)]
-        if command:
-            html = Command.do_command(command)
-            self.wfile.write(html)
-        else:
+        try:
+            command = requestDispatcher[string.lower(self.path)]
+        except:
             self.wfile.write("Unsupported Command")
+        else:
+            if command:
+                html = Command.do_command(command)
+                self.wfile.write(html)
+
 
 
 #Create Templates

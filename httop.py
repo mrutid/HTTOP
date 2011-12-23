@@ -4,21 +4,27 @@ import string
 import BaseHTTPServer
 import unicodedata
 import parsers
+import collections
 
 HOST_NAME = "localhost" #'bandini.hi.inet'
 PORT_NUMBER = 8080
 
-#Config Commands
-requestDispatcher = {
-    '/ls': {'path': "ls -la $HOME", 'parse': parsers.parse},
-    '/top': {'path': "top -l 1", 'parse': parsers.parse_top},
-    '/top/basic': {'path': "top -l 1", 'parse': parsers.parse}
-}
+#Config Commands for
+#USED IN parsers.parse_top(output_command, header_separator=False, include_header=False)
+class MyDict(dict):
+    def __missing__(self, key):
+        return False
+#todo TDD LINK
 
+requestDispatcher = MyDict({
+    '/ls': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse}),
+    '/top': MyDict({'path': "top -l 1", 'parse': parsers.parse, 'header_separator':"" }),
+    '/top/basic': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse, 'header_separator':'drwxr-xr-x    2 mru   mru          68 May 17  2010 .Xcode', 'include_header':True})
+})
 
-def do_command(command):
-    output_command = subprocess.check_output(command['path'], shell=True)
-    html = command['parse'](output_command)
+def do_command(command, shell_flag=True):
+    output_command = subprocess.check_output(command['path'], shell=shell_flag)
+    html = command['parse'](output_command, command['header_separator'],command['include_header'])
     return html
 
 class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):

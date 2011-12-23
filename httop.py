@@ -47,7 +47,8 @@ class ParseConsole:
 #Config Commands
 requestDispatcher = {
     '/ls': {'path': "ls -la /usr", 'parse': ParseConsole.parse},
-    '/top': {'path': "top -l 1", 'parse': ParseConsole.parse_top}
+    '/top': {'path': "top -l 1", 'parse': ParseConsole.parse_top,},
+    '/top/basic': {'path': "top -l 1", 'parse': ParseConsole.parse}
 }
 
 class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):

@@ -17,5 +17,3 @@ def parse(output_command, header_separator, include_header=False):
             if include_header:
                 word_matrix.append(aux_word_split)
     return topTemplate.render(matrix=word_matrix)
-
-

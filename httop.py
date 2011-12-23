@@ -4,7 +4,6 @@ import string
 import BaseHTTPServer
 import unicodedata
 import parsers
-import collections
 
 HOST_NAME = "localhost" #'bandini.hi.inet'
 PORT_NUMBER = 8080
@@ -12,19 +11,23 @@ PORT_NUMBER = 8080
 #Config Commands for
 #USED IN parsers.parse_top(output_command, header_separator=False, include_header=False)
 class MyDict(dict):
+    #noinspection PyUnusedLocal
     def __missing__(self, key):
         return False
-#todo TDD LINK
+
+    #todo TDD LINK
 
 requestDispatcher = MyDict({
     '/ls': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse}),
-    '/top': MyDict({'path': "top -l 1", 'parse': parsers.parse, 'header_separator':"" }),
-    '/top/basic': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse, 'header_separator':'drwxr-xr-x    2 mru   mru          68 May 17  2010 .Xcode', 'include_header':True})
+    '/top': MyDict({'path': "top -l 1", 'parse': parsers.parse, 'header_separator': ""}),
+    '/top/basic': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse,
+                          'header_separator': 'drwxr-xr-x    2 mru   mru          68 May 17  2010 .Xcode',
+                          'include_header': True})
 })
 
 def do_command(command, shell_flag=True):
     output_command = subprocess.check_output(command['path'], shell=shell_flag)
-    html = command['parse'](output_command, command['header_separator'],command['include_header'])
+    html = command['parse'](output_command, command['header_separator'], command['include_header'])
     return html
 
 class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
@@ -37,14 +40,16 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         path = string.lower(self.path)
         try:
             command = requestDispatcher[path]
-        except:
-            self.wfile.write("Unsupported Command")
+        except KeyError :
+            html = "Unsupported Command"
+            self.wfile.write(html)
         else:
             if command:
                 html = do_command(command)
                 #Hechizo nivel Archimago
-                html = unicodedata.normalize('NFKD', html).encode('ascii','ignore')
+                html = unicodedata.normalize('NFKD', html).encode('ascii', 'ignore')
                 self.wfile.write(html)
+
 
 #Start the Http Server
 http_server = server_class = BaseHTTPServer.HTTPServer((HOST_NAME, PORT_NUMBER), HTTPHandler)

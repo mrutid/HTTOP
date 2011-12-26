@@ -15,8 +15,6 @@ class MyDict(dict):
     def __missing__(self, key):
         return False
 
-    #todo TDD LINK
-
 requestDispatcher = MyDict({
     '/ls': MyDict({'path': "ls -la $HOME", 'parse': parsers.parse}),
     '/top': MyDict({'path': "top -l 1", 'parse': parsers.parse, 'header_separator': ""}),
@@ -45,11 +43,9 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.wfile.write(html)
         else:
             if command:
-                html = do_command(command)
-                #Hechizo nivel Archimago
+                html = do_command(command) #Hechizo nivel Archimago
                 html = unicodedata.normalize('NFKD', html).encode('ascii', 'ignore')
                 self.wfile.write(html)
-
 
 #Start the Http Server
 http_server = server_class = BaseHTTPServer.HTTPServer((HOST_NAME, PORT_NUMBER), HTTPHandler)
